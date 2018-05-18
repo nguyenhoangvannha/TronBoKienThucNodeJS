@@ -14,25 +14,7 @@ app.use("/public", express.static(__dirname + "/public"));
 
 app.get("/", function (req, res) {
     console.log(req.cookies);
-    res.send(`
-    <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>NodeJS Server</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./public/css/bootstrap.min.css">
-</head>
-<body>
-    <h1>Hello {user}</h1>
-    <h4>Request time ${req.requestTime}</h4>
-    <a name="" id="" class="btn btn-success" href="#" role="button">Loaded css</a>
-    
-    <script src="./public/js/bootstrap.min.js"></script>
-</body>
-</html>
-    `);
+    res.render('index');
 });
 
 app.get("/api", function (req, res) {
@@ -42,8 +24,9 @@ app.get("/api", function (req, res) {
     })
 })
 app.get("/user/:id", function (req, res) {
-    res.cookie("Username ", req.params.id);
-    res.send(`<h1>Hello ${req.params.id}</h1>`);
+    res.render('user', {
+        ID:req.params.id
+    });
 })
 app.listen(port, function () {
     console.log("Sever on " + port);
