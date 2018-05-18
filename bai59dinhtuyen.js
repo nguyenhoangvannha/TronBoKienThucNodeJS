@@ -1,6 +1,3 @@
-// PS C:\Windows\system32> npm root -g
-// C:\Users\naco\AppData\Roaming\npm\node_modules
-// PS C:\Windows\system32>
 var http = require("http");
 var fs = require("fs");
 http.createServer(function (req, res) {
