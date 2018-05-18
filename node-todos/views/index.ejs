@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="app.todo">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Node/Angular Todos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body ng-controller="todoController">
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4 text-center">{{appName}}
+                <span class="badge badge-info">{{todos.length}}</span>
+            </h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content
+                or information.</p>
+        </div>
+        <div id="todo-list" class="row">
+            <div class="col-md-6" style="display: block;margin: auto;">
+                <div class="input-group mb-3" ng-repeat="todo in todos">
+                    <div class="checkbox" >
+                        <a href="" ng-click="deleteTodo(todo)"><i class="fa fa-remove"></i></a>
+                        <input type="checkbox" ng-change="updateTodo(todo)" ng-model="todo.ISDONE" aria-label="Checkbox for following text input">
+                        <label type="text" ng-class="{strike: todo.ISDONE}" 
+                            editable-text="todo.NAME" e-form="textBtnForm" onaftersave="updateTodo(todo)"> {{todo.NAME}}</label>
+                        <a href="" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"><i class="fa fa-edit"></i></a>
+                    </div>
+                </div>
+                <p class="text-center" ng-show="loading">
+                    <span class="fa fa-spinner fa-spin fa-3x"></span>
+                </p>
+            </div>
+        </div>
+        <div id="todo-form" class="row">
+            <div class="col-md-8">
+                <form>
+                    <div class="form-group">
+                        <input type="text" ng-model="formData.NAME" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter node">
+                    </div>
+                    <button type="submit" ng-click="createTodo()" ng-disabled="!formData.NAME" class="btn btn-primary" style="display: block;margin: auto;">Add</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <link href="//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+        crossorigin="anonymous">
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.1/css/xeditable.min.css" rel="stylesheet">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-xeditable/0.8.1/js/xeditable.min.js"></script>
+    <script src="assets/js/main/app.js"></script>
+    <script src="assets/js/main/services/svTodos.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <script src="//stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
