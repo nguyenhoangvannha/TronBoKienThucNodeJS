@@ -18,23 +18,20 @@ app.use("/public", express.static(__dirname + "/public"));
 
 app.get("/", function (req, res) {
     console.log(req.cookies);
-    res.render('api');
+    res.render('login');
 });
 
-app.get("/api/user/:id", function (req, res) {
+app.get("/api", function (req, res) {
     res.json({
         firstName: "Mai",
         lastName: "Hoa"
     })
 })
-app.post("/api/user/", jsonParser, function (req, res) {
-    
-})
-app.put("/api/user/", jsonParser, function (req, res) {
-    
-})
-app.delete("/api/user/:id", function (req, res) {
-    
+app.get("/user/:id", function (req, res) {
+    res.render('user', {
+        ID:req.params.id,
+        queryString: req.query.qstr
+    });
 })
 app.post("/login", urlencodedParser, function (req, res) {
     res.send("Wellcome "+ req.body.username);
