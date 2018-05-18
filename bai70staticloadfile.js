@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var cookieParser = require('cookie-parser');
 var port = 3000;
 
 app.use("/", function (req, res, next) {
@@ -8,11 +7,9 @@ app.use("/", function (req, res, next) {
     req.requestTime = new Date();
     next();
 });
-app.use(cookieParser());
 app.use("/public", express.static(__dirname + "/public"));
 
 app.get("/", function (req, res) {
-    console.log(req.cookies);
     res.send(`
     <!DOCTYPE html>
 <html>
@@ -41,7 +38,6 @@ app.get("/api", function (req, res) {
     })
 })
 app.get("/user/:id", function (req, res) {
-    res.cookie("Username ", req.params.id);
     res.send(`<h1>Hello ${req.params.id}</h1>`);
 })
 app.listen(port, function () {
